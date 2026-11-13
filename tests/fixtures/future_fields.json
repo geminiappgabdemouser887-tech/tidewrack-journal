@@ -1,0 +1,16 @@
+{
+  "save_version": 9,
+  "flags": {
+    "skeptic": false,
+    "believer": true,
+    "trusted_edith": true,
+    "radioed_tom": true
+  },
+  "future_top_level": {"marker": "retain"},
+  "journal": {
+    "discovered_ids": ["future_log"],
+    "read_ids": [],
+    "pinned_id": null,
+    "future_metadata": {"sort": "custom"}
+  }
+}
