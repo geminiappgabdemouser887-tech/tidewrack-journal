@@ -15,11 +15,14 @@ static func try_migrate(raw: Variant) -> Dictionary:
 	var source: Dictionary = raw
 	var migrated: Dictionary = source.duplicate(true)
 
-	var source_version := LEGACY_SAVE_VERSION
+	var source_version: int = LEGACY_SAVE_VERSION
 	if migrated.has("save_version"):
-		if typeof(migrated["save_version"]) != TYPE_INT:
+		var serialized_version: Variant = migrated["save_version"]
+		if typeof(serialized_version) != TYPE_INT and typeof(serialized_version) != TYPE_FLOAT:
 			return _failure("save_version must be an integer.")
-		source_version = migrated["save_version"]
+		source_version = int(serialized_version)
+		if float(source_version) != float(serialized_version):
+			return _failure("save_version must be an integer.")
 		if source_version < LEGACY_SAVE_VERSION:
 			return _failure("save_version cannot be negative or zero.")
 
