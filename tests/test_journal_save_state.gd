@@ -1,6 +1,7 @@
 extends SceneTree
 
 const JournalSaveState = preload("res://scripts/journal_save_state.gd")
+const JournalSaveStore = preload("res://scripts/journal_save_store.gd")
 
 var _failures := 0
 
@@ -13,6 +14,7 @@ func _init() -> void:
 	_test_unknown_fields_and_future_version_survive()
 	_test_invalid_flags_fail_without_coercion()
 	_test_discovery_normalization_is_idempotent()
+	_test_corrupt_active_save_recovers_from_backup()
 
 	if _failures == 0:
 		print("All journal save-state regression tests passed.")
@@ -94,6 +96,22 @@ func _test_discovery_normalization_is_idempotent() -> void:
 	_expect_true(first["ok"] and second["ok"], "normalized journal should remain loadable")
 	_expect_equal(first["save"]["journal"], second["save"]["journal"], "normalization must be idempotent")
 	_expect_equal(first["save"]["journal"]["discovered_ids"], ["radio_log", "edith_note"], "read entries must be discoverable once")
+
+
+func _test_corrupt_active_save_recovers_from_backup() -> void:
+	var active_path := "user://journal-save-recovery-test.json"
+	var active_file := FileAccess.open(active_path, FileAccess.WRITE)
+	active_file.store_string("{ this is not valid json")
+	active_file.close()
+
+	var backup_file := FileAccess.open(active_path + ".bak", FileAccess.WRITE)
+	backup_file.store_string(JSON.stringify(_fixture("keep_it_quiet.json")))
+	backup_file.close()
+
+	var result := JournalSaveStore.load_with_recovery(active_path)
+	_expect_true(result["ok"], "valid backup must recover a corrupt active save")
+	_expect_equal(result["recovered_from_backup"], true, "recovery must identify the backup source")
+	_expect_equal(result["save"]["flags"]["trusted_edith"], true, "backup recovery must retain story flags")
 
 
 func _fixture(name: String) -> Dictionary:
