@@ -1,0 +1,15 @@
+{
+  "save_version": 2,
+  "flags": {
+    "skeptic": false,
+    "believer": true,
+    "trusted_edith": true,
+    "radioed_tom": true
+  },
+  "world": {"lamp_room_complete": true},
+  "journal": {
+    "discovered_ids": ["lens_notes", "edith_letter"],
+    "read_ids": ["lens_notes"],
+    "pinned_id": "lens_notes"
+  }
+}
