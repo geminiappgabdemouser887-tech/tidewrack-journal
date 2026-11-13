@@ -2,6 +2,10 @@
 
 A focused Godot 4 save-state compatibility module and regression suite for journal persistence.
 
+The complete release contract—including exactly how a pre-change save loads
+afterward and where every edge case is covered—is in
+[docs/save-behavior.md](docs/save-behavior.md).
+
 ## Compatibility contract
 
 `JournalSaveState.try_migrate()` is a pure migration boundary:
@@ -45,3 +49,4 @@ The suite covers each release-blocking condition:
 | Unknown future fields survive | `future_fields.json` |
 | Invalid flags are never coerced away | `test_invalid_flags_fail_without_coercion` |
 | Duplicate/replayed discoveries are idempotent | `test_discovery_normalization_is_idempotent` |
+| Recovery and transient-UI cases | [docs/save-behavior.md](docs/save-behavior.md) |
