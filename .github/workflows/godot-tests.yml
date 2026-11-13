@@ -1,0 +1,18 @@
+name: Godot regression tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - codex/**
+
+jobs:
+  journal-save-state:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run save-state regressions
+        run: godot --headless --path . -s res://tests/test_journal_save_state.gd

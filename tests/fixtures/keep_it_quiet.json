@@ -1,0 +1,10 @@
+{
+  "flags": {
+    "skeptic": false,
+    "believer": true,
+    "trusted_edith": true,
+    "radioed_tom": false
+  },
+  "world": {"keeper_conversation_complete": true},
+  "choice_history": ["keep_it_quiet"]
+}

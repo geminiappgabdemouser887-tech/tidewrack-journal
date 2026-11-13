@@ -1,0 +1,12 @@
+{
+  "player_position": {"x": 12.5, "y": 3.0},
+  "flags": {
+    "skeptic": true,
+    "believer": false,
+    "trusted_edith": false,
+    "radioed_tom": true,
+    "mod_flag": "unchanged"
+  },
+  "world": {"lamp_room_complete": false},
+  "unknown_legacy_field": "keep-me"
+}

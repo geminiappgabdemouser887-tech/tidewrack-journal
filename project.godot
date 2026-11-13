@@ -1,0 +1,13 @@
+; Engine configuration file.
+; Run the regression suite with:
+; godot --headless --path . -s res://tests/test_journal_save_state.gd
+
+config_version=5
+
+[application]
+config/name="Tidewrack Journal Save Hardening"
+config/features=PackedStringArray("4.0")
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
