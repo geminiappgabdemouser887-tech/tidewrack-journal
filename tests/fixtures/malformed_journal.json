@@ -1,0 +1,10 @@
+{
+  "flags": {
+    "skeptic": true,
+    "believer": false,
+    "trusted_edith": true,
+    "radioed_tom": false
+  },
+  "world": {"lamp_room_complete": false},
+  "journal": "broken legacy journal value"
+}
